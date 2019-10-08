@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+@section Styles {
+    <link href="@Url.Content("~/Content/Chat/Chat.css")" rel="stylesheet" type="text/css" />
+}
+<div class="row">
+    <div id="wrapper">
+        <div id="menu">
+            <p class="welcome">Welcome, <b></b></p>
+            <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+            <div style="clear:both"></div>
+        </div>
+
+        <div id="chatbox">
+            @{
+                string dataFile = Server.MapPath("~/Content/ChatLog/ChatLog.txt");
+                string result = null;
+                if (File.Exists(dataFile))
+                {
+                    result = File.ReadAllText(dataFile);
+                }
+            }
+            @Html.Raw(@result)
+        </div>
+
+        <form name="message" action="">
+            <input name="usermsg" type="text" id="usermsg" size="63" />
+            <input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+        </form>
+
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Chat.js")"></script>
+    @*<script type="text/javascript">
+        // jQuery Document
+        $(document).ready(function () {
+            setInterval(loadLog, 2.5);
+        });
+    </script>*@
+</div>
+
